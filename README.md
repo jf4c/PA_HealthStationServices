@@ -7,8 +7,7 @@
 ## 🔗 Integrações 
 ----
   #### 🌐 External
-  <!-- Demais serviços -->
-  >[Robbu](https://robbu.global/docs/api-documentacao/) 
+  <!-- apis externas -->
 
 ## 📄 Regras importantes
 ----
