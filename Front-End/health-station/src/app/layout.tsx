@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import 'primeflex/primeflex.css';  
 import 'primeicons/primeicons.css';
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
