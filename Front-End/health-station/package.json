@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@googlemaps/react-wrapper": "^1.1.35",
     "@mui/icons-material": "^5.15.17",
     "next": "14.2.3",
     "primeflex": "^3.3.1",
