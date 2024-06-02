@@ -18,12 +18,12 @@ export type PaginationProps = {
   disabled?: boolean
 }
 
-export default function Pagination(props: PaginationProps) {
+export default function Pagination(props: PaginationProps) { 
   return (
     <Paginator 
-      first={props.currentPage}
+      first={props.pageSize * (props.currentPage - 1)}
       rows={props.pageSize} 
-      totalRecords={props.rowCount} 
+      totalRecords={props.rowCount}
       onPageChange={(e) => props.onPageChange?.({ ...e, page: e.page + 1 })} 
     />
   )
