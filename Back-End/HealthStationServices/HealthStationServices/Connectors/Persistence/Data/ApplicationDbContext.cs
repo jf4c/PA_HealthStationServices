@@ -14,11 +14,14 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<HealthStationEntity> HealthStations { get; set; }
     public DbSet<AddressEntity> Addresses { get; set; }
+    public DbSet<HealthServicesEntity> HealthServices { get; set; }
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new HealthStationEntityMap());
         modelBuilder.ApplyConfiguration(new AddressEntityMap());
+        modelBuilder.ApplyConfiguration(new HealthServicesEntityMap());
         modelBuilder.HasDefaultSchema(Schema);
     }
 

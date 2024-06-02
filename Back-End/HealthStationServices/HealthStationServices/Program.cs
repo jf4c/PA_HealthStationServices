@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddScoped<IHealthStationService, HealthStationService>();
+builder.Services.AddScoped<IHealthService, HealthService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -33,6 +34,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(c => 
+{
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+    c.AllowAnyOrigin();
+});
 
 app.MapControllers();
 

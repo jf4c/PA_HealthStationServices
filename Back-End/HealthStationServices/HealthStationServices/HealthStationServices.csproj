@@ -24,8 +24,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Connectors\Interfaces\" />
       <Folder Include="Connectors\Persistence\Migrations\" />
+      <Folder Include="Domain\Util\" />
       <Folder Include="Infrastructure\" />
     </ItemGroup>
 

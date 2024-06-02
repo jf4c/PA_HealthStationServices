@@ -6,6 +6,8 @@ public class HealthStationEntity : EntityBase<Guid>
 {
     public string Name { get; set; }
     public AddressEntity Address { get; set; }
+    
+    public List<HealthServicesEntity> HealthServices { get; set; }
 
     public HealthStationEntity()
     {
