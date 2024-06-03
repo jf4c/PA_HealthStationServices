@@ -5,6 +5,7 @@ import { Skeleton } from 'primereact/skeleton';
 
 import { getAllHealthServices } from '@/service/getAllHealthServices';
 import { CarouselContainer, LoadingContainer } from './style';
+import DialogHealthService from '../DialogHealthService';
 
 interface HealthService {
     name: string;
@@ -36,6 +37,8 @@ export default function HealthServices() {
           numScroll: 1
       }
   ];
+  const [healthService, setHealthService] = useState<HealthService | null>(null);
+  const [dialogHealthService, setDialogHealthService] = useState<boolean>(false);
 
   useEffect(() => {
       getAllHealthServices().then((data) => setHealthServices(data))
@@ -60,9 +63,12 @@ export default function HealthServices() {
       return (
           <CarouselContainer className="surface-border border-round m-2 text-center px-3">
             <div className='mb-3 cards'>
-              <a href='https://primereact.org/carousel/'>  
+              <div onClick={() => {
+                setHealthService(healthService)
+                setDialogHealthService(true)
+               }}>  
                   <img  src={`/img/${healthService.name}.png`} alt={healthService.name} className="w-10" />
-              </a>  
+              </div>  
             </div>
             <div>
                 <h4 className="mb-1">{healthService.name}</h4>
@@ -75,6 +81,8 @@ export default function HealthServices() {
       <div className="card">
           <Carousel value={healthServices} numVisible={5} numScroll={3} responsiveOptions={responsiveOptions} className="custom-carousel" circular
           autoplayInterval={3000} itemTemplate={loading ? loadingTemplate : healthServiceTemplate} />
+
+            <DialogHealthService visible={dialogHealthService} nameService={healthService?.name || ''} description={healthService?.description || ''} onHide={() => setDialogHealthService(false)} />
       </div>
   )
 }

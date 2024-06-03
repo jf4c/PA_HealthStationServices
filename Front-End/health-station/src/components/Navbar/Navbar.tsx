@@ -9,22 +9,17 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import HomeIcon from '@mui/icons-material/Home';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import Link from 'next/link';
 
 export default function Navbar() {
-  const router = useRouter();
-  const route: MenuItem[] = [
-    {label: 'home', icon:() => <HomeIcon/>,  command: () => router.push('/')},
-    {label: 'posto', icon:() => <HealthAndSafetyIcon/>, command: () => router.push('/healthStation')},
-    {label: 'Serviços', icon:() => <VaccinesIcon/>, command: () => router.push('/services')},
-    {label: 'Teste', icon: 'pi pi-home', command: () => router.push('/healthStation')},
-  ];
-  
   return (
     <Nav>
-      <LocalHospitalIcon className='icon'/>
-      <div className="Card flex align-items-center">
-        <TabMenu model={route}/>
-      </div>
+        <LocalHospitalIcon className='logo'/>
+        <ul>
+          <li><Link className='link' href='/'><HomeIcon className='icon'/>Home</Link></li>
+          <li> <Link className='link' href='/healthStation'><HealthAndSafetyIcon  className='icon'/>Posto</Link></li>
+          <li><Link className='link' href='/services'><VaccinesIcon  className='icon'/>services</Link></li>
+        </ul>
     </Nav>
     
   )

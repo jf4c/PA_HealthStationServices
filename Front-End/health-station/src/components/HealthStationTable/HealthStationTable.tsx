@@ -1,22 +1,19 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column, ColumnFilterElementTemplateOptions} from 'primereact/column';
 import { filter, getAllHealthStation } from '@/service/getAllHealthStation';
 import Pagination, { PaginationProps } from '../Pagination';
 import { PaginatorPageChangeEvent } from 'primereact/paginator';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import { InputText } from 'primereact/inputtext';
-import { IconField } from 'primereact/iconfield';
-import { InputIcon } from 'primereact/inputicon';
-
-
 import { TableContainer } from './style';
 import Filters from '../Filters';
 import { DropdownChangeEvent } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import EmptyData from '../EmptyData';
 import DialogLocate from '../DialogLocate';
+import { addressContext } from '@/context/address';
+import { address } from "@/service/getCep";
 
 interface HealthStation {
   id: string;
@@ -36,6 +33,8 @@ export default function HealthStationTable() {
   const [selectedHealthStation, setSelectedHealthStation] = useState<HealthStation | null>(null)
   const [filterActive , setFilterActive] = useState<boolean>(false);
   const [dialogLocation, setDialogLocation] = useState<boolean>(false);
+  const {address} = useContext<address | any>(addressContext);
+
   useEffect(() => {
       getAllHealthStation(filter!).then((data) => {
         const _data:HealthStation[] = data.results
@@ -140,7 +139,25 @@ export default function HealthStationTable() {
                 rowCount={totalRecords}
                 onPageChange={onPageChange} 
               />
-          <DialogLocate visible={dialogLocation}  onHide={() =>{if (!dialogLocation) return; setDialogLocation(false); }}/>
+          <DialogLocate 
+            visible={dialogLocation}  
+            onHide={() =>
+              {
+                if (!dialogLocation) return; 
+                setDialogLocation(false);
+                setFilter((prevFilter) => ({ ...prevFilter, state: address.uf, city: address.localidade, page: 1, pageSize: 10}));
+                console.log(address);
+                console.log(filter);
+              }
+            }
+          />
+
+          {/* <DialogHealthService
+            visible={!!selectedHealthStation}
+            nameService={selectedHealthStation?.name || ''}
+            description={selectedHealthStation?.description || ''}
+            onHide={() => setSelectedHealthStation(null)}
+          /> */}
       </TableContainer>
   );
 }

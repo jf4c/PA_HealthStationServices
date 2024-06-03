@@ -1,5 +1,5 @@
-import React from 'react'
 import { EmptyDataContainer } from './style'
+import React from 'react'
 
 export default function EmptyData() {
   return (
