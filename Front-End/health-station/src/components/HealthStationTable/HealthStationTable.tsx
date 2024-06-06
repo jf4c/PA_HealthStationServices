@@ -14,16 +14,22 @@ import EmptyData from '../EmptyData';
 import DialogLocate from '../DialogLocate';
 import { addressContext } from '@/context/address';
 import { address } from "@/service/getCep";
+import DialogMap from '../DialogMap';
+import Maps from '../Maps';
+import Link from 'next/link';
 
 interface HealthStation {
   id: string;
+  address: Address;
+  icon?: object;
+}
+interface Address {
   name: string;
   state: string;
   city: string;
   district: string;
   Logradouro: string;
   number: string;
-  icon?: object;
 }
 
 export default function HealthStationTable() {
@@ -32,8 +38,9 @@ export default function HealthStationTable() {
   const [totalRecords, setTotalRecords] = useState(0);
   const [selectedHealthStation, setSelectedHealthStation] = useState<HealthStation | null>(null)
   const [filterActive , setFilterActive] = useState<boolean>(false);
-  const [dialogLocation, setDialogLocation] = useState<boolean>(false);
   const {address} = useContext<address | any>(addressContext);
+  const [dialogLocation, setDialogLocation] = useState<boolean>(false);
+  const [dialogMap, setDialogMap] = useState<boolean>(false);
 
   useEffect(() => {
       getAllHealthStation(filter!).then((data) => {
@@ -108,11 +115,20 @@ export default function HealthStationTable() {
         district={filter.district}
         districtChange={onDistrictChange}
         clearFilter={clearFilter}
-
-    />
+      />
     )
   };
 
+  const actionButton = (rowData: HealthStation) => {
+    return (
+      <Link href={`/healthStation/${rowData.id}`}>  
+        <Button 
+          icon="pi pi-map-marker" 
+          severity='secondary'
+        />
+      </Link>
+    )
+  }
 
   return (
       <TableContainer className="card">
@@ -126,11 +142,14 @@ export default function HealthStationTable() {
             onSelectionChange={(e) => setSelectedHealthStation(e.value)}
             emptyMessage={<EmptyData/>}
           >
-              <Column className='icon' field='icon' header=""></Column>
-              <Column field="address.state" header="Estado"></Column>
-              <Column field="name" header="Name"></Column>
-              <Column field="address.city" header="Cidade"></Column>
-              <Column field="address.district" header="Bairro"></Column>
+            <Column className='icon' field='icon' header=""></Column>
+            <Column field="address.state" header="Estado"></Column>
+            <Column field="name" header="Name"></Column>
+            <Column field="address.city" header="Cidade"></Column>
+            <Column field="address.district" header="Bairro"></Column>
+            <Column field="address.logradouro" header="Logradouro"></Column>
+            <Column field="address.number" header="Número"></Column>
+            <Column body={actionButton} ></Column>
 
           </DataTable>
               <Pagination 
@@ -151,13 +170,7 @@ export default function HealthStationTable() {
               }
             }
           />
-
-          {/* <DialogHealthService
-            visible={!!selectedHealthStation}
-            nameService={selectedHealthStation?.name || ''}
-            description={selectedHealthStation?.description || ''}
-            onHide={() => setSelectedHealthStation(null)}
-          /> */}
+          <DialogMap visible={dialogMap} onHide={()=>{setDialogMap(false)}} />
       </TableContainer>
   );
 }

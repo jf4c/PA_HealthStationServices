@@ -12,7 +12,7 @@ export const Nav = styled.nav`
 
   ul{
     display: flex;
-    width: 30%;
+    width: 20%;
     justify-content: space-between;
   }
   li{

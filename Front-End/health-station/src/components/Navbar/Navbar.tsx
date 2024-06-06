@@ -17,8 +17,8 @@ export default function Navbar() {
         <LocalHospitalIcon className='logo'/>
         <ul>
           <li><Link className='link' href='/'><HomeIcon className='icon'/>Home</Link></li>
-          <li> <Link className='link' href='/healthStation'><HealthAndSafetyIcon  className='icon'/>Posto</Link></li>
-          <li><Link className='link' href='/services'><VaccinesIcon  className='icon'/>services</Link></li>
+          {/* <li> <Link className='link' href='/healthStation/city'><HealthAndSafetyIcon  className='icon'/>Posto</Link></li> */}
+          {/* <li><Link className='link' href='/services'><VaccinesIcon  className='icon'/>services</Link></li> */}
         </ul>
     </Nav>
     
