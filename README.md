@@ -1,13 +1,13 @@
-# 💊 HealthStationServices
-----
+[# 💊 HealthStationServices
+<!-- ----
 
   ### [Resumo do Serviço]
   
-<!--[O que é chamado e/ou chama o serviço]-->
+
 ## 🔗 Integrações 
 ----
   #### 🌐 External
-  <!-- apis externas -->
+  
 
 ## 📄 Regras importantes
 ----
@@ -20,7 +20,7 @@
   ```csharp
   for (int i = 0 ; i < 10; i++)
    {
-     // Code to execute.
+     
    }
   ```
 
@@ -45,5 +45,4 @@
   
   #### ➡️ Integration tests
   ```
-  dotnet test [Teste que vai ser execultado]
-  ```
+  dotnet test [Teste que vai ser execultado] -->
